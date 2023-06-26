@@ -1,4 +1,4 @@
-> .\rascal.exe --post -u https://***.com/123123/login.php -w C:\tools\xato-10k.txt --username admin --username_field user_id --password_field passwd --success_text OK
+.\rascal.exe --post -u https://***.com/123123/login.php -w C:\tools\xato-10k.txt --username admin --username_field user_id --password_field passwd --success_text OK
 
         -- SETTINGS VERIFICATION --
         username: admin
