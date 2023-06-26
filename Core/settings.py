@@ -1,0 +1,25 @@
+custom_user_agent = None
+
+class Settings:
+    def __init__(self):
+        global custom_user_agent
+
+        self.user_agents = (
+            ('Mozilla/5.0 (Linux; Android 11; Samsung SM-A025G) '
+             'AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19'),
+            ('Mozilla/5.0 (Linux; Android 11; SM-A426U) '
+             'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.105 Mobile Safari/537.36'),
+            ('Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 '
+             '(KHTML, like Gecko) FxiOS/36.0  Mobile/15E148 Safari/605.1.15'),
+            ('Mozilla/5.0 (Linux; Android 11; SM-T227U Build/RP1A.200720.012; wv) '
+             'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/87.0.4280.141 Safari/537.36'),
+            ('Mozilla/5.0 (X11; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0'),
+            ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+             'Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46'),
+            ('Mozilla/5.0 (X11; CrOS x86_64 13982.82.0) AppleWebKit/537.36 (KHTML, like Gecko) '
+             'Chrome/92.0.4515.157 Safari/537.36'),
+            ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) '
+             'Version/14.1.1 Safari/605.1.15'),
+        )
+        self.custom_user_agent = custom_user_agent
+
