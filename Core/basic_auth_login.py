@@ -67,6 +67,7 @@ class BasicAuthLogin(Core.settings.Settings):
             print(e)
 
         response = requests.get(self.url, headers=headers)
+        response_headers = str(response.headers)
 
         if self.success_text:
             if self.success_text in response.text:
@@ -77,7 +78,12 @@ class BasicAuthLogin(Core.settings.Settings):
                 print(f"{i} of {password_count}", end="\r")
 
         if self.failure_text:
-            if self.failure_text in response.text:
+            if self.failure_text in response.text or self.failure_text in response_headers:
+                if i == 0:
+                    print("###")
+                    print(f"Sample headers from source.\nI.e., Build your failure string from header details."
+                          f":\n {response_headers}")
+                    print("###")
                 i += 1
                 print(f"{i} of {password_count}", end="\r")
             else:

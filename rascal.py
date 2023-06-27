@@ -140,7 +140,7 @@ def main():
         bal.login_workers()
 
     if not args.basic and not args.post:
-        print(f"Specify an operation type (E.g. --basic/--post).")
+        print(f"Specify an operation/method type (E.g. --basic/--post).")
         sys.exit(1)
 
 
