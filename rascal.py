@@ -85,15 +85,8 @@ def main():
         print(f"Please provide either a --success_text or --failure_text message to compare against, not both.")
         sys.exit(0)
 
-    if args.success_text:
-        success_text = args.success_text
-    else:
-        success_text = args.success_text
-
-    if args.failure_text:
-        failure_text = args.failure_text
-    else:
-        failure_text = args.failure_text
+    success_text = args.success_text
+    failure_text = args.failure_text
 
     if not success_text and not failure_text:
         print(f'Supply a "--success_text" or a "--failure_text" parameter. This value indicates text on the login'
