@@ -1,7 +1,8 @@
 import argparse
 import sys
-import Core.postformlogin
+import Core.post_form_login
 import Core.settings
+import Core.basic_auth_login
 
 
 def main():
@@ -9,6 +10,9 @@ def main():
     parser.add_argument('--post', required=False,
                         default=None, action="store_true",
                         help="Specify a form login using POST.")
+    parser.add_argument('--basic', required=False,
+                        default=None, action="store_true",
+                        help="Attempt basic authentication.")
     parser.add_argument('-u', '--url', required=True, type=str,
                         default=None, dest="url",
                         help="Specify URL to fuzz (e.g. www.google.com/search?q=FUZZ")
@@ -18,10 +22,10 @@ def main():
     parser.add_argument('--username', required=True, type=str,
                         default=None, dest="username",
                         help="Specify a username to attack.")
-    parser.add_argument('--username_field', required=True, type=str,
+    parser.add_argument('--username_field', required=False, type=str,
                         default=None, dest="username_field",
                         help="Specify the form field name for the username input.")
-    parser.add_argument('--password_field', required=True, type=str,
+    parser.add_argument('--password_field', required=False, type=str,
                         default=None, dest="password_field",
                         help="Specify the form field name for the password input.")
     parser.add_argument('--success_text', required=False, type=str,
@@ -61,17 +65,18 @@ def main():
         print(f"Specify a username: --username")
         sys.exit(1)
 
-    if args.username_field:
-        username_field = args.username_field
-    else:
-        print(f"Specify a form field name for the username: --username_field <userid>")
-        sys.exit(1)
+    if not args.basic and args.post:
+        if args.username_field:
+            username_field = args.username_field
+        else:
+            print(f"Specify a form field name for the username: --username_field <userid>")
+            sys.exit(1)
 
-    if args.password_field:
-        password_field = args.password_field
-    else:
-        print(f"Specify a form field name for the password: --password_field <passwd>")
-        sys.exit(1)
+        if args.password_field:
+            password_field = args.password_field
+        else:
+            print(f"Specify a form field name for the password: --password_field <passwd>")
+            sys.exit(1)
 
     if args.custom_user_agent:
         Core.settings.custom_user_agent = args.custom_user_agent
@@ -90,9 +95,15 @@ def main():
     else:
         failure_text = args.failure_text
 
+    if not success_text and not failure_text:
+        print(f'Supply a "--success_text" or a "--failure_text" parameter. This value indicates text on the login'
+              f' page after either a successful or failed login attempt.')
+        sys.exit(1)
+
     if args.post:
         print(f"""
         -- SETTINGS VERIFICATION --
+        url: {url}
         username: {username}
         password list: {wordlist}
         username post form field: {username_field}
@@ -108,10 +119,36 @@ def main():
         if answer.lower() != "y":
             sys.exit(0)
 
-        pfl = Core.postformlogin.PostFormLogin(url, wordlist, username, username_field, password_field,
-                                               success_text, failure_text)
+        pfl = Core.post_form_login.PostFormLogin(url, wordlist, username, username_field, password_field,
+                                                 success_text, failure_text)
         pfl.build_password_list()  # initialize password wordlist in memory
         pfl.login_workers()
+
+    if args.basic:
+        print(f"""
+        -- SETTINGS VERIFICATION --
+        url: {url}
+        username: {username}
+        password list: {wordlist}
+        success message: {success_text}
+        failure message: {failure_text}
+        custom user agent: {Core.settings.custom_user_agent}
+        """)
+
+        answer = input("Does this look OK? (Y/n) ")
+        if answer == "":
+            answer = "Y"
+        if answer.lower() != "y":
+            sys.exit(0)
+
+        bal = Core.basic_auth_login.BasicAuthLogin(url, username, wordlist,
+                                                   success_text, failure_text)
+        bal.build_password_list()  # initialize password wordlist in memory
+        bal.login_workers()
+
+    if not args.basic and not args.post:
+        print(f"Specify an operation type (E.g. --basic/--post).")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
