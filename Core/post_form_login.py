@@ -81,6 +81,13 @@ class PostFormLogin(Core.settings.Settings):
 
         response = requests.post(self.url, data=credentials, headers=headers)
 
+        if response.cookies:
+            for cookie in response.cookies:
+                print(f"""
+                Authentication cookie:
+                {response.cookies}
+                """)
+
         if self.success_text:
             if self.success_text in response.text:
                 print(f"[+] {self.username}:{password}")
