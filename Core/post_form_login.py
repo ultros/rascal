@@ -7,7 +7,7 @@ import Core.settings
 
 i = 0  # Global for keeping track of current password and total passwords.
 password_count = 0  # Total passwords from password list
-quit = False  # Stop worker threads; global state
+hard_quit = False  # Stop worker threads; global state
 
 
 class PostFormLogin(Core.settings.Settings):
@@ -54,11 +54,11 @@ class PostFormLogin(Core.settings.Settings):
         """
         Attempts to login using credential data and POST method
         """
-        global quit
+        global hard_quit
         global i
         global password_count
 
-        if quit:  # stops worker threads (killing process) on ctrl+c or username/password found
+        if hard_quit:  # stops worker threads (killing process) on ctrl+c or username/password found
             pid = os.getpid()
             os.kill(pid, 9)
 
@@ -91,7 +91,7 @@ class PostFormLogin(Core.settings.Settings):
         if self.success_text:
             if self.success_text in response.text:
                 print(f"[+] {self.username}:{password}")
-                quit = True
+                hard_quit = True
             else:
                 i += 1
                 print(f"{i} of {password_count}", end="\r")
@@ -102,4 +102,4 @@ class PostFormLogin(Core.settings.Settings):
                 print(f"{i} of {password_count}", end="\r")
             else:
                 print(f"[+] {self.username}:{password}")
-                quit = True
+                hard_quit = True

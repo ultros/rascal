@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 import Core.post_form_login
 import Core.settings
@@ -148,5 +149,6 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print(f"Stopping new threads and shutting down.")
-        quit = True  # stops new worker threads on ctrl+c
+        print(f"Killing application...")
+        pid = os.getpid()
+        os.kill(pid, 9)
