@@ -33,7 +33,7 @@
     Prepared wordlist in memory with 1000 entries.
     
         ##########
-        Response headers from source.
+        Sample from response headers.
         I.e., Build your failure string from header details:
         Basic realm="Restricted Content"
         ##########
