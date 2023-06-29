@@ -69,7 +69,7 @@ class BasicAuthLogin(Core.settings.Settings):
             print(e)
 
         response = requests.get(self.url, headers=headers)
-        response_headers = str(response.headers)
+        response_headers = response.headers
 
         if response.cookies:
             print(f"""
@@ -91,10 +91,9 @@ class BasicAuthLogin(Core.settings.Settings):
     ##########
     Response headers from source.
     I.e., Build your failure string from header details:
-    {response_headers})
+    {response_headers['WWW-Authenticate']}
     ##########
     """)
-
                 i += 1
 
             if self.failure_text in response.text or self.failure_text in response_headers:
