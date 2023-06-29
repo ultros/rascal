@@ -94,13 +94,12 @@ class BasicAuthLogin(Core.settings.Settings):
     {response.headers['WWW-Authenticate']}
     ##########
     """)
-                    i += 1
 
             if self.failure_text in response.text or self.failure_text in str(response.headers):
                 i += 1
                 print(f"{i} of {password_count}", end="\r")
             else:
-                if i is 1:
+                if i is 0:
                     print(f"[!] This could be a false positive if you've configured your --failure_text "
                           f"({self.failure_text}) incorrectly.")
                 print(f"[+] {self.username}:{password}")
