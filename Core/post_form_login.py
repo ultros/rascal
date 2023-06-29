@@ -1,5 +1,4 @@
 import os
-import sys
 import concurrent.futures
 import random
 import requests
@@ -101,5 +100,10 @@ class PostFormLogin(Core.settings.Settings):
                 i += 1
                 print(f"{i} of {password_count}", end="\r")
             else:
+                if i is 0:
+                    print(f"[!] This could be a false positive if you've configured your --failure_text "
+                          f"({self.failure_text}) incorrectly.")
                 print(f"[+] {self.username}:{password}")
                 hard_quit = True
+                i += 1
+                print(f"{i} of {password_count}", end="\r")

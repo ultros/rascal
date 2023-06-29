@@ -4,6 +4,8 @@ import sys
 import Core.post_form_login
 import Core.settings
 import Core.basic_auth_login
+from termcolor import colored
+
 
 
 def main():
@@ -97,6 +99,7 @@ def main():
     if args.post:
         print(f"""
         -- SETTINGS VERIFICATION --
+        {colored(f"scheme: {url.split(':')[0]}", "yellow", attrs=['blink'])}
         url: {url}
         username: {username}
         password list: {wordlist}
@@ -121,6 +124,7 @@ def main():
     if args.basic:
         print(f"""
         -- SETTINGS VERIFICATION --
+        {colored(f"scheme: {url.split(':')[0]}", "yellow", attrs=['blink'])}
         url: {url}
         username: {username}
         password list: {wordlist}
@@ -152,3 +156,5 @@ if __name__ == "__main__":
         print(f"Killing application...")
         pid = os.getpid()
         os.kill(pid, 9)
+    except Exception as e:
+        print(e)

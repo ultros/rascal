@@ -69,7 +69,6 @@ class BasicAuthLogin(Core.settings.Settings):
             print(e)
 
         response = requests.get(self.url, headers=headers)
-        response_headers = response.headers
 
         if response.cookies:
             print(f"""
@@ -87,18 +86,24 @@ class BasicAuthLogin(Core.settings.Settings):
 
         if self.failure_text:
             if i == 0:
-                print(f"""
+                if response.headers:
+                    print(f"""
     ##########
     Response headers from source.
     I.e., Build your failure string from header details:
-    {response_headers['WWW-Authenticate']}
+    {response.headers['WWW-Authenticate']}
     ##########
     """)
-                i += 1
+                    i += 1
 
-            if self.failure_text in response.text or self.failure_text in response_headers:
+            if self.failure_text in response.text or self.failure_text in str(response.headers):
                 i += 1
                 print(f"{i} of {password_count}", end="\r")
             else:
+                if i is 1:
+                    print(f"[!] This could be a false positive if you've configured your --failure_text "
+                          f"({self.failure_text}) incorrectly.")
                 print(f"[+] {self.username}:{password}")
                 hard_quit = True
+                i += 1
+                print(f"{i} of {password_count}", end="\r")
