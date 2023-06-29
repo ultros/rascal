@@ -35,7 +35,7 @@
         ##########
         Response headers from source.
         I.e., Build your failure string from header details:
-        {'Date': 'Thu, 29 Jun 2023 03:49:47 GMT', 'Server': 'Apache/2.4.57 (Debian)', 'WWW-Authenticate': 'Basic realm="Restricted Content"', 'Content-Length': '457', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'text/html; charset=iso-8859-1'})
+        Basic realm="Restricted Content"
         ##########
         
     [+] admin:12345
