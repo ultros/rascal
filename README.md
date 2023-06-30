@@ -3,6 +3,7 @@
     C:\tools\> .\rascal.exe --post -u https://***.com/123123/login.php -w C:\tools\xato-10k.txt --username admin --username_field user_id --password_field passwd --success_text OK
 
         -- SETTINGS VERIFICATION --
+        scheme: https
         url: https://***.com/123123/login.php
         username: admin
         password list: C:\tools\xato-10k.txt
@@ -22,6 +23,7 @@
     $ python3 rascal.py --basic -u http://***.com/123123/321 -w /usr/share/wordlists/seclists/Passwords/xato-net-10-million-passwords-1000.txt --username admin --failure_text 'Restricted Content'
     
             -- SETTINGS VERIFICATION --
+            scheme: http
             url: http://***.com/123123/321
             username: admin
             password list: /usr/share/wordlists/seclists/Passwords/xato-net-10-million-passwords-1000.txt
