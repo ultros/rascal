@@ -89,7 +89,7 @@ class BasicAuthLogin(Core.settings.Settings):
                 if response.headers:
                     print(f"""
     ##########
-    Response headers from source.
+    Sample of response headers.
     I.e., Build your failure string from header details:
     {response.headers['WWW-Authenticate']}
     ##########
