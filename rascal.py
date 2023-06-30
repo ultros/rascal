@@ -1,3 +1,9 @@
+#!/usr/bin/env python3.11
+
+__version__ = "1.0"
+__author__ = "Jesse Shelley"
+__email__ = "realjesseshelley@gmail.com"
+
 import argparse
 import os
 import sys
