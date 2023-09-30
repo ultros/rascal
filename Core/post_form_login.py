@@ -12,7 +12,7 @@ hard_quit = False  # Stop worker threads; global state
 class PostFormLogin(Core.settings.Settings):
 
     def __init__(self, url: str, wordlist: str, username: str, username_field: str, password_field: str,
-                 success_text: str, failure_text: str):
+                 success_text: str, failure_text: str) -> None:
         Core.settings.Settings.__init__(self)
         self.url = url
         self.wordlist = wordlist
@@ -23,7 +23,7 @@ class PostFormLogin(Core.settings.Settings):
         self.success_text = success_text
         self.failure_text = failure_text
 
-    def build_password_list(self):
+    def build_password_list(self) -> None:
         """
         Builds a list of passwords in memory for manipulation and processing.
         """
@@ -40,7 +40,7 @@ class PostFormLogin(Core.settings.Settings):
 
         print(f'Prepared wordlist in memory with {password_count} entries.')
 
-    def login_workers(self):
+    def login_workers(self) -> None:
         """
         Creates the worker threads with concurrent.futures.
         """
@@ -49,7 +49,7 @@ class PostFormLogin(Core.settings.Settings):
             for password in self.passwords:
                 futures.append(executor.submit(self.perform_login, password.strip()))
 
-    def perform_login(self, password: str):
+    def perform_login(self, password: str) -> None:
         """
         Attempts to login using credential data and POST method
         """

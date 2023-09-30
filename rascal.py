@@ -2,7 +2,7 @@
 
 __version__ = "1.0"
 __author__ = "Jesse Shelley"
-__email__ = "realjesseshelley@gmail.com"
+__email__ = "max@anti-forensics.com"
 
 import argparse
 import os
@@ -13,7 +13,7 @@ import Core.basic_auth_login
 from termcolor import colored
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Concurrent login brute forcer.")
     parser.add_argument('--post', required=False,
                         default=None, action="store_true",

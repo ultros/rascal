@@ -10,7 +10,7 @@ hard_quit = False  # Stop worker threads; global state
 
 
 class BasicAuthLogin(Core.settings.Settings):
-    def __init__(self, url: str, username: str, wordlist: str, success_text: str, failure_text: str):
+    def __init__(self, url: str, username: str, wordlist: str, success_text: str, failure_text: str) -> None:
         Core.settings.Settings.__init__(self)
         self.url = url
         self.username = username
@@ -19,7 +19,7 @@ class BasicAuthLogin(Core.settings.Settings):
         self.success_text = success_text
         self.failure_text = failure_text
 
-    def build_password_list(self):
+    def build_password_list(self) -> None:
         """
         Builds a list of passwords in memory for manipulation and processing.
         """
@@ -45,7 +45,7 @@ class BasicAuthLogin(Core.settings.Settings):
             for password in self.passwords:
                 futures.append(executor.submit(self.perform_login, password.strip()))
 
-    def perform_login(self, password: str):
+    def perform_login(self, password: str) -> None:
         """
         Attempts to log in using credential data and POST method
         """
