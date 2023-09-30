@@ -84,7 +84,7 @@ class PostFormLogin(Core.settings.Settings):
             for cookie in response.cookies:
                 print(f"""
                 Authentication cookie:
-                {response.cookies}
+                {cookie}
                 """)
 
         if self.success_text:

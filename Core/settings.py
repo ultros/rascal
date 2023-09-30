@@ -1,4 +1,5 @@
 custom_user_agent = None
+import datetime
 
 class Settings:
     def __init__(self):
@@ -23,3 +24,12 @@ class Settings:
         )
         self.custom_user_agent = custom_user_agent
 
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        print(f'[+] Started at {datetime.datetime.today()}')
+        responses = func(*args, **kwargs)
+        print(f'[+] Completed at {datetime.datetime.today()}')
+        print(f'[+] Closing...')
+        return responses
+    return wrapper

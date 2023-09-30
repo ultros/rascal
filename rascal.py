@@ -13,7 +13,6 @@ import Core.basic_auth_login
 from termcolor import colored
 
 
-
 def main():
     parser = argparse.ArgumentParser(description="Concurrent login brute forcer.")
     parser.add_argument('--post', required=False,
